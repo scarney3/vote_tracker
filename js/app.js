@@ -10,6 +10,7 @@ var Photo = function(fileLocation) { //constructor
 	this.index = [];
 }
 
+// Hella photos
 var photo1 = new Photo('img/cat1.jpg');
 var photo2 = new Photo('img/cat2.jpg');
 var photo3 = new Photo('img/cat3.jpg');
