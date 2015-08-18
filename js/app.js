@@ -35,6 +35,7 @@ Tracker.prototype.leftphoto = function() {
 	console.log("left has " + vote.leftPhoto.votes);
 	results.innerHTML = ('Left has ' + vote.leftPhoto.votes + ' and right has '
 + vote.rightPhoto.votes);
+	$('#nextbutton').show();
 };
 
 Tracker.prototype.rightphoto = function() {
@@ -42,6 +43,7 @@ Tracker.prototype.rightphoto = function() {
 	console.log("right is " + vote.rightPhoto.fileLocation);
 	vote.rightPhoto.votes++;
 	console.log("right has " + vote.rightPhoto.votes);
+	$('#nextbutton').show();
 };
 
 Tracker.prototype.incrementKittens = function(photo) {
@@ -49,8 +51,6 @@ Tracker.prototype.incrementKittens = function(photo) {
 	var index = this.rightphoto(photo);
 	this.photoArray[index][1]++;
 };
-
-$('div[#highlight]').hide();
 
 var vote = new Tracker();
 
@@ -79,10 +79,12 @@ lphoto.addEventListener('click', vote.leftphoto);
 nextbutton.addEventListener('click', function (){
 	vote.getPhoto();
 	vote.renderPhotos();
+	$('#nextbutton').hide();
 }); 
 
 vote.getPhoto();
 vote.renderPhotos();
+$('#nextbutton').hide();
 
 // vote.waitingForVote();
 // console.dir(vote);
