@@ -1,3 +1,4 @@
+// $(document).ready(function() {
 
 'use strict'
 // Waiting for vote state
@@ -7,51 +8,41 @@ var Photo = function(fileLocation) { //constructor
 	this.index = [];
 }
 
-var Tracker = function () {
-	this.leftPhoto = {};
-	this.rightPhoto = {};
+var Tracker = function() {
 	this.photoArray = [];
+	this.leftPhoto = '';
+	this.rightPhoto = '';
 }
-
-var tracker = new Tracker();
 
 Tracker.prototype.getPhoto = function() {
 	this.leftPhoto = this.photoArray[Math.floor(Math.random() * (this.photoArray.length - 1))];
 	this.rightPhoto = this.photoArray[Math.floor(Math.random() * (this.photoArray.length - 1))];
-
+	console.log(this.rightPhoto);
 	while (this.rightPhoto === this.leftPhoto) {
 		this.leftPhoto = this.photoArray[Math.floor(Math.random() * (this.photoArray.length - 1))];
-
-	}
-Tracker.prototype.renderPhotos = function() {
-	var lphoto = document.getElementById('leftphoto');
-	var rphoto = document.getElementById('rightphoto');
-	rphoto.attributes[1].value = this.rightPhoto.fileLocation;
-	lphoto.attributes[1].value = this.leftPhoto.fileLocation;
 	}
 };
 
-Tracker.prototype.rightphoto = function() {
-	console.log (++tracker.rightphoto.vote);
-}
+Tracker.prototype.renderPhotos = function() {
+	rphoto.attributes[1].value = this.rightPhoto.fileLocation;
+	lphoto.attributes[1].value = this.leftPhoto.fileLocation;
+};
 
 Tracker.prototype.leftphoto = function() {
-	console.log (++tracker.leftphoto.vote);
-}
+	console.log ("left was clicked");
+	console.log("left is " + this.leftPhoto);
+};
 
-rightphoto.addEventListener('click', tracker.rightphoto);
-leftphoto.addEventListener('click', tracker.leftphoto);
+Tracker.prototype.rightphoto = function() {
+	console.log ("right was clicked");
+	console.log("right is " + this.rightPhoto);
+};
 
-// Tracker.prototype.waitingForVote = function() {
-// 	for (var i = 0; i < 13; i++) { 
-// 	var voteButton = document.getElementById('votebutton');
-// 	var Vote = document.getElementById('rightphoto');
-// 	// highlight() // CSS for highlight later
-// }
-// 	// drawTheChart()?
-// 	// giveUserOptionToVoteAgain()?
-
-// };
+Tracker.prototype.incrementKittens = function(photo) {
+	var index = this.leftphoto(photo);
+	var index = this.rightphoto(photo);
+	this.photoArray[index][1]++;
+};
 
 var vote = new Tracker();
 
@@ -70,17 +61,34 @@ vote.photoArray.push(new Photo('img/kittens/cat12.jpg'));
 vote.photoArray.push(new Photo('img/kittens/cat13.jpg'));
 vote.photoArray.push(new Photo('img/kittens/cat14.jpg'));
 
+var lphoto = document.getElementById('leftphoto');
+var rphoto = document.getElementById('rightphoto');
+
+rphoto.addEventListener('click', vote.rightphoto);
+lphoto.addEventListener('click', vote.leftphoto);
+
 vote.getPhoto();
 vote.renderPhotos();
-vote.waitingForVote();
-console.dir(vote);
+// vote.waitingForVote();
+// console.dir(vote);
+
+// voteButton.addEventListener('click', waitingForVote);
+
+// });
 
 // Photo.prototype.highlight = function() {
 // 	var getPhoto = document.getElementById('photos');
 // 	newDiv.
 // };
 
+// 	// highlight() // CSS for highlight later
+// }
+// 	// drawTheChart()?
+// 	// giveUserOptionToVoteAgain()?
 
+
+
+// };
 // function Tally() {
 // 	var Vote document.getElementById("leftphoto");
 // 	var Vote document.getElementById("rightphoto");
@@ -107,6 +115,6 @@ console.dir(vote);
 // 	action6()
 // }
 
-voteButton.addEventListener('click', waitingForVote);
+
 
 //some 'document.getElementById' variables to access and manipulate document
