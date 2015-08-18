@@ -1,18 +1,18 @@
 // $(document).ready(function() {
 
-'use strict'
+'use strict';
 // Waiting for vote state
 var Photo = function(fileLocation) { //constructor
 	this.fileLocation = fileLocation;
 	this.votes = 1;
 	this.index = [];
-}
+};
 
 var Tracker = function() {
 	this.photoArray = [];
 	this.leftPhoto = '';
 	this.rightPhoto = '';
-}
+};
 
 Tracker.prototype.getPhoto = function() {
 	this.leftPhoto = this.photoArray[Math.floor(Math.random() * (this.photoArray.length - 1))];
@@ -30,12 +30,18 @@ Tracker.prototype.renderPhotos = function() {
 
 Tracker.prototype.leftphoto = function() {
 	console.log ("left was clicked");
-	console.log("left is " + this.leftPhoto);
+	console.log("left is " + vote.leftPhoto.fileLocation);
+	vote.leftPhoto.votes++;
+	console.log("left has " + vote.leftPhoto.votes);
+	results.innerHTML = ('Left has ' + vote.leftPhoto.votes + ' and right has '
++ vote.rightPhoto.votes);
 };
 
 Tracker.prototype.rightphoto = function() {
 	console.log ("right was clicked");
-	console.log("right is " + this.rightPhoto);
+	console.log("right is " + vote.rightPhoto.fileLocation);
+	vote.rightPhoto.votes++;
+	console.log("right has " + vote.rightPhoto.votes);
 };
 
 Tracker.prototype.incrementKittens = function(photo) {
@@ -43,6 +49,8 @@ Tracker.prototype.incrementKittens = function(photo) {
 	var index = this.rightphoto(photo);
 	this.photoArray[index][1]++;
 };
+
+$('div[#highlight]').hide();
 
 var vote = new Tracker();
 
@@ -63,12 +71,19 @@ vote.photoArray.push(new Photo('img/kittens/cat14.jpg'));
 
 var lphoto = document.getElementById('leftphoto');
 var rphoto = document.getElementById('rightphoto');
+var results = document.getElementById('results');
+var nextbutton = document.getElementById('nextbutton');
 
 rphoto.addEventListener('click', vote.rightphoto);
 lphoto.addEventListener('click', vote.leftphoto);
+nextbutton.addEventListener('click', function (){
+	vote.getPhoto();
+	vote.renderPhotos();
+}); 
 
 vote.getPhoto();
 vote.renderPhotos();
+
 // vote.waitingForVote();
 // console.dir(vote);
 
