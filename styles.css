@@ -1,1 +1,6 @@
-//stylesheets for vote tracker
+*{
+  font-family: Forte;
+}
+body {
+  background-color: #ACF0F2;
+}
