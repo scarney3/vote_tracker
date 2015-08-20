@@ -4,3 +4,6 @@
 body {
   background-color: #ACF0F2;
 }
+#votechart {
+  width: 250px;
+}

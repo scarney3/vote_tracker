@@ -3,6 +3,7 @@ $(document).ready(function() {
 'use strict';
 // Waiting for vote state
 var photoArray = [];
+var Chart = console.log();
 
 $.ajax({
 	url: 'https://api.imgur.com/3/album/DDoWy',
@@ -64,6 +65,7 @@ Tracker.prototype.leftphoto = function() {
 	console.log("left has " + vote.leftPhoto.votes);
 	results.innerHTML = ('Left has ' + vote.leftPhoto.votes + ' and right has '
 + vote.rightPhoto.votes);
+	vote.createChart();
 	$('#nextbutton').show();
 };
 
@@ -74,21 +76,20 @@ Tracker.prototype.rightphoto = function() {
 	console.log("right has " + vote.rightPhoto.votes);
 	results.innerHTML = ('Left has ' + vote.leftPhoto.votes + ' and right has '
 + vote.rightPhoto.votes);
+	vote.createChart();
 	$('#nextbutton').show();
 };
 
-// Tracker.prototype.createChart = function() {
-// 	// var leftVotes = vote.leftPhoto.votes;
-// 	// var rightVotes = vote.rightPhoto.votes;
-// 	var ctx = document.getElementById('createChart').getContext('2d');
-// 	var myDoughnutChart = new Chart(ctx).Doughnut(data)([{
-// 		value: 1,
-// 		color: "green"
-// 	}, {
-// 		value: 1,
-// 		color: "yellow"
-// 	}]);
-// };
+Tracker.prototype.createChart = function() {
+	var ctx = document.getElementById('createChart').getContext('2d');
+	var myDoughnutChart = new Chart(ctx).Doughnut(data)([{
+		value: 1,
+		color: "green"
+	}, {
+		value: 1,
+		color: "yellow"
+	}]);
+};
 
 Tracker.prototype.incrementKittens = function(photo) {
 	var index = this.leftphoto(photo);
@@ -123,11 +124,17 @@ lphoto.addEventListener('click', vote.leftphoto);
 nextbutton.addEventListener('click', function (){
 	vote.getPhoto();
 	vote.renderPhotos();
+	vote.createChart();
 	$('#nextbutton').hide();
 });
 
 vote.getPhoto();
 vote.renderPhotos();
+vote.createChart();
 $('#nextbutton').hide();
 
 });
+
+
+	// var leftVotes = vote.leftPhoto.votes;
+	// var rightVotes = vote.rightPhoto.votes;
